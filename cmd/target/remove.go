@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/tosbaa/acucli/helpers/httpclient"
@@ -33,7 +34,23 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var id_array = []string{}
 		id, _ = cmd.Flags().GetString("id")
-		id_array = append(id_array, id)
+		// Check if the input is a file
+		if isFile, filePath := isFilePath(id); isFile {
+			// Read file contents
+			contents, err := readFile(filePath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, "Error reading file:")
+				return
+			}
+
+			// Print array of file contents
+
+			for _, line := range contents {
+				id_array = append(id_array, line)
+			}
+		} else {
+			id_array = append(id_array, id)
+		}
 		makeDeleteRequest(id_array)
 
 	},
@@ -54,8 +71,10 @@ func makeDeleteRequest(ids []string) {
 		return
 	}
 	if resp.StatusCode == 204 {
-		fmt.Println(chalk.Red, "Target Removed:", chalk.Reset)
-		fmt.Printf("%s%s%s\n", chalk.Red, ids[0], chalk.Reset)
+		fmt.Println(chalk.Red, chalk.Bold.TextStyle("Target Removed:"), chalk.Reset)
+		for _, id := range ids {
+			fmt.Printf("%s%s%s\n", chalk.Red, id, chalk.Reset)
+		}
 	} else {
 		fmt.Println(resp)
 	}

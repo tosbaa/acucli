@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
 )
@@ -35,9 +36,9 @@ to quickly create a Cobra application.`,
 		var id_array = []string{}
 		id, _ = cmd.Flags().GetString("id")
 		// Check if the input is a file
-		if isFile, filePath := isFilePath(id); isFile {
+		if isFile, filePath := filehelper.IsFilePath(id); isFile {
 			// Read file contents
-			contents, err := readFile(filePath)
+			contents, err := filehelper.ReadFile(filePath)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, "Error reading file:")
 				return

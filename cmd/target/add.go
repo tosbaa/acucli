@@ -4,15 +4,14 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package target
 
 import (
-	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
-	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
 )
@@ -48,9 +47,9 @@ var AddCmd = &cobra.Command{
 
 		targets := []Target{}
 		// Check if the input is a file
-		if isFile, filePath := isFilePath(inputTarget); isFile {
+		if isFile, filePath := filehelper.IsFilePath(inputTarget); isFile {
 			// Read file contents
-			contents, err := readFile(filePath)
+			contents, err := filehelper.ReadFile(filePath)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, "Error reading file:")
 				return
@@ -67,37 +66,6 @@ var AddCmd = &cobra.Command{
 			makeRequest(targets, groups)
 		}
 	},
-}
-
-// Check if the input is a file path
-func isFilePath(input string) (bool, string) {
-	// Check if the file exists in the current directory
-	if _, err := os.Stat(input); err == nil {
-		absPath, _ := filepath.Abs(input)
-		return true, absPath
-	}
-	return false, ""
-}
-
-// Read file contents and return as an array of strings
-func readFile(filePath string) ([]string, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var contents []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		contents = append(contents, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return contents, nil
 }
 
 func makeRequest(t []Target, groups []string) {

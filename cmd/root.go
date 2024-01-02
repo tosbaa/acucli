@@ -26,6 +26,7 @@ import (
 	"os"
 
 	"github.com/tosbaa/acucli/cmd/target"
+	"github.com/tosbaa/acucli/cmd/targetGroup"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -59,6 +60,7 @@ func Execute() {
 
 func init() {
 	RootCmd.AddCommand(target.TargetCmd)
+	RootCmd.AddCommand(targetGroup.TargetGroupCmd)
 	cobra.OnInitialize(initConfig)
 
 	// Here you will define your flags and configuration settings.

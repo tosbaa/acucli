@@ -47,6 +47,8 @@ type responseBody struct {
 	Verification any    `json:"verification"`
 }
 
+var id string
+
 func (r responseBody) String() string {
 	var builder strings.Builder
 

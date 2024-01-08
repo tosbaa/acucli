@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/tosbaa/acucli/helpers/filehelper"
@@ -19,8 +18,6 @@ import (
 type RemovePostBody struct {
 	TargetIDList []string `json:"target_id_list"`
 }
-
-var id string
 
 // RemoveCmd represents the remove command
 var RemoveCmd = &cobra.Command{
@@ -33,26 +30,10 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		var id_array = []string{}
-		id, _ = cmd.Flags().GetString("id")
-		// Check if the input is a file
-		if isFile, filePath := filehelper.IsFilePath(id); isFile {
-			// Read file contents
-			contents, err := filehelper.ReadFile(filePath)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, "Error reading file:")
-				return
-			}
-
-			// Print array of file contents
-
-			for _, line := range contents {
-				id_array = append(id_array, line)
-			}
-		} else {
-			id_array = append(id_array, id)
+		input := filehelper.ReadStdin()
+		if input != nil {
+			makeDeleteRequest(input)
 		}
-		makeDeleteRequest(id_array)
 
 	},
 }
@@ -80,12 +61,9 @@ func makeDeleteRequest(ids []string) {
 		fmt.Println(resp)
 	}
 	defer resp.Body.Close()
-
 }
 
 func init() {
-	RemoveCmd.Flags().StringVarP(&id, "id", "", "", "Target ID")
-	RemoveCmd.MarkFlagRequired("id")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

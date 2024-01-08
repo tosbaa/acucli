@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/tosbaa/acucli/helpers/filehelper"
@@ -39,31 +38,21 @@ var AddCmd = &cobra.Command{
 	 you can give the URL or file path that includes targets line by line`,
 	Run: func(cmd *cobra.Command, args []string) {
 		groups := []string{}
-		inputTarget, _ := cmd.Flags().GetString("target")
+		input := filehelper.ReadStdin()
 		inputGID, _ := cmd.Flags().GetString("gid")
 		if inputGID != "" {
 			groups = append(groups, inputGID)
 		}
 
-		targets := []Target{}
-		// Check if the input is a file
-		if isFile, filePath := filehelper.IsFilePath(inputTarget); isFile {
-			// Read file contents
-			contents, err := filehelper.ReadFile(filePath)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, "Error reading file:")
-				return
-			}
+		if input != nil {
+			targets := []Target{}
 
-			// Print array of file contents
-
-			for _, line := range contents {
+			for _, line := range input {
 				targets = append(targets, Target{Address: line, Description: "", Type: "default", Criticality: 30})
 			}
 			makeRequest(targets, groups)
 		} else {
-			targets = append(targets, Target{Address: target, Description: "", Type: "default", Criticality: 30})
-			makeRequest(targets, groups)
+			fmt.Println("Please provide addresses to add")
 		}
 	},
 }
@@ -114,10 +103,8 @@ func makeRequest(t []Target, groups []string) {
 }
 
 func init() {
-	AddCmd.Flags().StringVarP(&target, "target", "t", "", "Target (Target to Add)")
 	AddCmd.Flags().StringVarP(&gid, "gid", "g", "", "Group ID (To assign the targets to the group)")
 
-	AddCmd.MarkFlagRequired("target")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

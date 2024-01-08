@@ -67,7 +67,7 @@ func addTargets(pBody postBody, id string) {
 }
 
 func init() {
-	AddTargetsCmd.Flags().StringVarP(&id, "id", "", "", "Target ID")
+	AddTargetsCmd.Flags().StringVarP(&id, "id", "", "", "Group Target ID")
 	AddTargetsCmd.MarkFlagRequired("id")
 	// Here you will define your flags and configuration settings.
 

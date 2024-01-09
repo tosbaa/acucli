@@ -39,16 +39,12 @@ func ReadFile(filePath string) ([]string, error) {
 
 func ReadStdin() []string {
 	var inputArray []string
-	file := os.Stdin
-	fi, err := file.Stat()
-	if err != nil {
-		fmt.Println("file.Stat()", err)
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		inputArray = append(inputArray, scanner.Text())
 	}
-	if fi.Size() > 0 {
-		scanner := bufio.NewScanner(os.Stdin)
-		for scanner.Scan() {
-			inputArray = append(inputArray, scanner.Text())
-		}
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error reading standard input:", err)
 	}
 	return inputArray
 }

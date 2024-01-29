@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -41,7 +42,7 @@ to quickly create a Cobra application.`,
 func makeDeleteRequest(ids []string) {
 	postBody := RemovePostBody{TargetIDList: ids}
 	requestJson, _ := json.Marshal(postBody)
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", httpclient.BASE_URL, "/targets/delete"), bytes.NewBuffer(requestJson))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", viper.GetString("URL"), "/targets/delete"), bytes.NewBuffer(requestJson))
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return

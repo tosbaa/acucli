@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -40,7 +41,7 @@ to quickly create a Cobra application.`,
 			for _, targetGroupName := range input {
 				postBody := PostBody{Name: targetGroupName}
 				requestJson, _ := json.Marshal(postBody)
-				req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", httpclient.BASE_URL, "/target_groups"), bytes.NewBuffer(requestJson))
+				req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", viper.GetString("URL"), "/target_groups"), bytes.NewBuffer(requestJson))
 				if err != nil {
 					fmt.Println("Error creating request:", err)
 					return

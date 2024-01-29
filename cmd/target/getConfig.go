@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -70,7 +71,7 @@ to quickly create a Cobra application.`,
 
 func getConfigRequest(i string) (int, configResponseBody) {
 	var respBody configResponseBody
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/targets/%s/configuration", httpclient.BASE_URL, i), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/targets/%s/configuration", viper.GetString("URL"), i), nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return 404, respBody

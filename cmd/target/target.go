@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -68,7 +69,7 @@ var TargetCmd = &cobra.Command{
 
 func GetTargetRequest(id string) (int, responseBody) {
 	var respBody responseBody
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s%s%s", httpclient.BASE_URL, "/targets/", id), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s%s%s", viper.GetString("URL"), "/targets/", id), nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return 404, respBody

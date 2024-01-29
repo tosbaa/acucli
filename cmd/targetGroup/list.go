@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 )
 
@@ -42,7 +43,7 @@ var ListCmd = &cobra.Command{
 	Long:  `Lists all the target groups with their name and their corresponding id to use it for other commands`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create an HTTP GET request using the custom client
-		req, err := http.NewRequest("GET", fmt.Sprintf("%s%s", httpclient.BASE_URL, "/target_groups"), nil)
+		req, err := http.NewRequest("GET", fmt.Sprintf("%s%s", viper.GetString("URL"), "/target_groups"), nil)
 		if err != nil {
 			fmt.Println("Error creating request:", err)
 			return

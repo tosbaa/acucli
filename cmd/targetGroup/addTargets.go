@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -44,7 +45,7 @@ to quickly create a Cobra application.`,
 
 func addTargets(pBody postBody, id string) {
 	requestJson, _ := json.Marshal(pBody)
-	req, err := http.NewRequest("PATCH", fmt.Sprintf("%s/target_groups/%s/targets", httpclient.BASE_URL, id), bytes.NewBuffer(requestJson))
+	req, err := http.NewRequest("PATCH", fmt.Sprintf("%s/target_groups/%s/targets", viper.GetString("URL"), id), bytes.NewBuffer(requestJson))
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return

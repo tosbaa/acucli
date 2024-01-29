@@ -11,6 +11,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/cmd/target"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -49,7 +50,7 @@ to quickly create a Cobra application.`,
 
 func GetTargetGroupRequest(id string) (int, idResponseBody) {
 	var respBody idResponseBody
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/target_groups/%s/targets", httpclient.BASE_URL, id), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/target_groups/%s/targets", viper.GetString("URL"), id), nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return 404, respBody

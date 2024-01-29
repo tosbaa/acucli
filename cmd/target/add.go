@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
@@ -60,7 +61,7 @@ var AddCmd = &cobra.Command{
 func makeRequest(t []Target, groups []string) {
 	postBody := PostBody{Targets: t, Groups: groups}
 	requestJson, _ := json.Marshal(postBody)
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", httpclient.BASE_URL, "/targets/add"), bytes.NewBuffer(requestJson))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s%s", viper.GetString("URL"), "/targets/add"), bytes.NewBuffer(requestJson))
 	if err != nil {
 		fmt.Println("Error creating request:", err)
 		return

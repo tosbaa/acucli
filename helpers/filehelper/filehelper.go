@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"reflect"
 )
 
 func IsFilePath(input string) (bool, string) {
@@ -47,4 +48,22 @@ func ReadStdin() []string {
 		fmt.Println("Error reading standard input:", err)
 	}
 	return inputArray
+}
+
+func PrintStructFields(s interface{}) {
+	v := reflect.ValueOf(s)
+
+	// Make sure the input is a struct
+	if v.Kind() != reflect.Struct {
+		fmt.Println("Input is not a struct")
+		return
+	}
+
+	// Iterate over fields
+	for i := 0; i < v.NumField(); i++ {
+		field := v.Type().Field(i)
+		value := v.Field(i)
+
+		fmt.Printf("%s: %v\n", field.Name, value.Interface())
+	}
 }

@@ -23,16 +23,19 @@ package cmd
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/tosbaa/acucli/cmd/target"
 	"github.com/tosbaa/acucli/cmd/targetGroup"
+	"github.com/tosbaa/acucli/helpers/httpclient"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 var cfgFile string
+var MyHTTPClient http.Client
 
 // rootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -62,6 +65,7 @@ func init() {
 	RootCmd.AddCommand(target.TargetCmd)
 	RootCmd.AddCommand(targetGroup.TargetGroupCmd)
 	cobra.OnInitialize(initConfig)
+	httpclient.CreateHttpClient(viper.GetString("API"))
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,

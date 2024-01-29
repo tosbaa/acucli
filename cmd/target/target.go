@@ -9,9 +9,9 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
 )
@@ -49,30 +49,6 @@ type responseBody struct {
 
 var id string
 
-func (r responseBody) String() string {
-	var builder strings.Builder
-
-	builder.WriteString("Response Body:\n")
-	builder.WriteString("+-----------------------------+-----------------------------------------------------+\n")
-	builder.WriteString("| Field                       | Value                                               |\n")
-	builder.WriteString("+-----------------------------+-----------------------------------------------------+\n")
-
-	addRow(&builder, "Address", r.Address)
-	addRow(&builder, "Agents", fmt.Sprintf("%v", r.Agents))
-	addRow(&builder, "ContinuousMode", fmt.Sprintf("%t", r.ContinuousMode))
-	addRow(&builder, "Criticality", fmt.Sprintf("%d", r.Criticality))
-	addRow(&builder, "DefaultScanningProfileID", r.DefaultScanningProfileID)
-	// ... Add rows for other fields
-
-	builder.WriteString("+-----------------------------+-----------------------------------------------------+\n")
-
-	return builder.String()
-}
-
-func addRow(builder *strings.Builder, field, value string) {
-	builder.WriteString(fmt.Sprintf("| %-28s | %-50s |\n", field, value))
-}
-
 // targetCmd represents the target command
 var TargetCmd = &cobra.Command{
 	Use:   "target",
@@ -82,7 +58,7 @@ var TargetCmd = &cobra.Command{
 		id, _ = cmd.Flags().GetString("id")
 		responseCode, respBody := GetTargetRequest(id)
 		if responseCode == 200 {
-			fmt.Println(respBody)
+			filehelper.PrintStructFields(respBody)
 		} else {
 			fmt.Fprintf(os.Stderr, "%sTarget not found%s\n", chalk.Red, chalk.Reset)
 		}
@@ -126,6 +102,8 @@ func init() {
 	TargetCmd.AddCommand(ListCmd)
 	TargetCmd.AddCommand(AddCmd)
 	TargetCmd.AddCommand(RemoveCmd)
+	TargetCmd.AddCommand(GetConfigCmd)
+
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

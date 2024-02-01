@@ -29,7 +29,6 @@ type PostBody struct {
 }
 
 var gid string
-var target string
 
 // addCmd represents the add command
 var AddCmd = &cobra.Command{

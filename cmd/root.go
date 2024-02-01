@@ -65,7 +65,6 @@ func init() {
 	RootCmd.AddCommand(target.TargetCmd)
 	RootCmd.AddCommand(targetGroup.TargetGroupCmd)
 	cobra.OnInitialize(initConfig)
-	httpclient.CreateHttpClient(viper.GetString("API"))
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
@@ -99,5 +98,6 @@ func initConfig() {
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+		httpclient.CreateHttpClient(viper.GetString("API"))
 	}
 }

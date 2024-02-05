@@ -39,7 +39,7 @@ to quickly create a Cobra application.`,
 		if responseCode == 200 {
 			for _, targetID := range respBody.TargetIDList {
 				_, target := target.GetTargetRequest(targetID)
-				fmt.Printf("%s\t%s\n", targetID, target.Address)
+				fmt.Printf("%s\t%s\n", target.Address, targetID)
 			}
 		} else {
 			fmt.Fprintf(os.Stderr, "%sTargetGroup not found%s\n", chalk.Red, chalk.Reset)

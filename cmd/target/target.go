@@ -104,6 +104,7 @@ func init() {
 	TargetCmd.AddCommand(AddCmd)
 	TargetCmd.AddCommand(RemoveCmd)
 	TargetCmd.AddCommand(GetConfigCmd)
+	TargetCmd.AddCommand(SetConfigCmd)
 
 	// Here you will define your flags and configuration settings.
 

@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	BASE_URL = "***REMOVED***"
+	BASE_URL = "https://194.16.0.72:3443/api/v1"
 )
 
 // MyHTTPClient is a custom HTTP client with default headers and insecure skip verification.

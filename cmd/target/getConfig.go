@@ -17,7 +17,7 @@ import (
 	"github.com/ttacon/chalk"
 )
 
-type configResponseBody struct {
+type ConfigResponseBody struct {
 	Description       string `json:"description"`
 	LimitCrawlerScope bool   `json:"limit_crawler_scope"`
 	Login             struct {
@@ -36,10 +36,10 @@ type configResponseBody struct {
 	ClientCertificatePassword string `json:"client_certificate_password"`
 	ScanSpeed                 string `json:"scan_speed"`
 	CaseSensitive             string `json:"case_sensitive"`
-	Technologies              []any  `json:"technologies"`
-	CustomHeaders             []any  `json:"custom_headers"`
-	CustomCookies             []any  `json:"custom_cookies"`
-	ExcludedPaths             []any  `json:"excluded_paths"`
+	Technologies              string `json:"technologies"`
+	CustomHeaders             string `json:"custom_headers"`
+	CustomCookies             string `json:"custom_cookies"`
+	ExcludedPaths             string `json:"excluded_paths"`
 	UserAgent                 string `json:"user_agent"`
 	Debug                     bool   `json:"debug"`
 }
@@ -69,8 +69,8 @@ to quickly create a Cobra application.`,
 	},
 }
 
-func getConfigRequest(i string) (int, configResponseBody) {
-	var respBody configResponseBody
+func getConfigRequest(i string) (int, ConfigResponseBody) {
+	var respBody ConfigResponseBody
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/targets/%s/configuration", viper.GetString("URL"), i), nil)
 	if err != nil {
 		fmt.Println("Error creating request:", err)

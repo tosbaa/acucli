@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/tosbaa/acucli/cmd/scanProfile"
 	"github.com/tosbaa/acucli/cmd/target"
 	"github.com/tosbaa/acucli/cmd/targetGroup"
 	"github.com/tosbaa/acucli/helpers/httpclient"
@@ -63,6 +64,7 @@ func Execute() {
 func init() {
 	RootCmd.AddCommand(target.TargetCmd)
 	RootCmd.AddCommand(targetGroup.TargetGroupCmd)
+	RootCmd.AddCommand(scanProfile.ScanProfileCmd)
 	cobra.OnInitialize(initConfig)
 
 	// Here you will define your flags and configuration settings.

@@ -11,10 +11,10 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/tosbaa/acucli/helpers/filehelper"
 	"github.com/tosbaa/acucli/helpers/httpclient"
 	"github.com/ttacon/chalk"
 )
@@ -25,6 +25,21 @@ type ScanProfile struct {
 	Name      string   `json:"name"`
 	ProfileID string   `json:"profile_id"`
 	SortOrder int      `json:"sort_order"`
+}
+
+func (sp ScanProfile) String() string {
+	var sb strings.Builder
+
+	sb.WriteString(fmt.Sprintf("Name: %s\n", sp.Name))
+	sb.WriteString(fmt.Sprintf("ProfileID: %s\n", sp.ProfileID))
+	sb.WriteString(fmt.Sprintf("Custom: %v\n", sp.Custom))
+	sb.WriteString(fmt.Sprintf("SortOrder: %d\n", sp.SortOrder))
+	sb.WriteString("Checks:\n")
+	for _, check := range sp.Checks {
+		sb.WriteString(fmt.Sprintf("  - %s\n", check))
+	}
+
+	return sb.String()
 }
 
 var id string
@@ -47,7 +62,7 @@ to quickly create a Cobra application.`,
 		} else {
 			responseCode, respBody := GetScanProfileRequest(id)
 			if responseCode == 200 {
-				filehelper.PrintStructFields(respBody)
+				fmt.Println(respBody)
 			} else {
 				fmt.Fprintf(os.Stderr, "%sScan Profile not found%s\n", chalk.Red, chalk.Reset)
 			}
@@ -62,7 +77,7 @@ func exportScanProfile(id string, path string) {
 	if respCode == 404 {
 		fmt.Fprintf(os.Stderr, "Scan Profile not found\n")
 	} else {
-		jsonData, err := json.Marshal(scanProfile)
+		jsonData, err := json.MarshalIndent(scanProfile, "", "  ")
 		if err != nil {
 			log.Fatalf("Error serializing struct to JSON: %v", err)
 		} else {

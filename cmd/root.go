@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/tosbaa/acucli/cmd/scan"
 	"github.com/tosbaa/acucli/cmd/scanProfile"
 	"github.com/tosbaa/acucli/cmd/target"
 	"github.com/tosbaa/acucli/cmd/targetGroup"
@@ -65,6 +66,7 @@ func init() {
 	RootCmd.AddCommand(target.TargetCmd)
 	RootCmd.AddCommand(targetGroup.TargetGroupCmd)
 	RootCmd.AddCommand(scanProfile.ScanProfileCmd)
+	RootCmd.AddCommand(scan.ScanCmd)
 	cobra.OnInitialize(initConfig)
 
 	// Here you will define your flags and configuration settings.

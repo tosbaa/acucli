@@ -15,7 +15,7 @@ You can install Acucli directly from the source code hosted on GitHub. Ensure yo
 ```bash
 go install github.com/tosbaa/acucli@latest
 
-
+```
 ## Usage
 
 After installation, you can start using Acucli to interact with your Acunetix scans. For detailed usage instructions and command options, refer to the [documentation](https://github.com/tosbaa/acucli) or use the help command:
@@ -35,4 +35,4 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ## Licensing
 
 The code in this project is licensed under MIT license.
-```
+

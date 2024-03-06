@@ -17,13 +17,10 @@ import (
 // removeCmd represents the remove command
 var RemoveCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Removes the given scanProfile",
+	Long: `Removes the given scanProfile. Takes the ids line by line from stdin. Example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+cat scanProfileids.txt | acucli scanProfile remove`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		if input != nil {

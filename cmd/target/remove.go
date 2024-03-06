@@ -23,13 +23,11 @@ type RemovePostBody struct {
 // RemoveCmd represents the remove command
 var RemoveCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Removes target",
+	Long: `Takes input as stdin. Example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	echo "9797f3aa-80f7-41a6-9e24-4926b35147cf" | acucli target remove : Removes the target
+	acucli target list | echo $(awk '{print $2}') | acucli target remove : Removes all targets`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		if input != nil {

@@ -21,13 +21,7 @@ type ScanProfiles struct {
 // listCmd represents the list command
 var ListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "List the scan profiles",
 	Run: func(cmd *cobra.Command, args []string) {
 		req, err := http.NewRequest("GET", fmt.Sprintf("%s%s", viper.GetString("URL"), "/scanning_profiles"), nil)
 		if err != nil {

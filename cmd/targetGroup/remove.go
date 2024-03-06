@@ -24,7 +24,11 @@ type RemovePostBody struct {
 var RemoveCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Remove a target group",
-	Long:  `You can remove a target group by giving its id as flag`,
+	Long: `Takes id input from stdin, removes it without deleting the targets inside. Example:
+	
+	echo "39468242-2706-43ce-8278-3edf30ed1889" | acucli targetGroup remove : Removes a single target group
+	cat toremove.txt | acucli targetGroup remove : Removes multiple
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		if input != nil {

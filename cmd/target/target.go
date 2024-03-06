@@ -54,7 +54,7 @@ var id string
 var TargetCmd = &cobra.Command{
 	Use:   "target",
 	Short: "Endpoint for target operations",
-	Long:  `You can do operations with subcommands to the targets or you can retrieve target information by giving id flag to the target command`,
+	Long:  `Retrieve target information from id flag`,
 	Run: func(cmd *cobra.Command, args []string) {
 		id, _ = cmd.Flags().GetString("id")
 		responseCode, respBody := GetTargetRequest(id)

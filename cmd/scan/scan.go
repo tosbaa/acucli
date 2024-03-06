@@ -35,13 +35,10 @@ var scanProfileId string
 // scanCmd represents the scan command
 var ScanCmd = &cobra.Command{
 	Use:   "scan",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Command to start the scan",
+	Long: `Command to start the scan, takes target ids from stdin and id of scan profile in flag, example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+cat target_ids.txt | acucli scan --scanProfileID=47973ea9-018b-4294-9903-bb1cf3b1e886`,
 	Run: func(cmd *cobra.Command, args []string) {
 		targets := filehelper.ReadStdin()
 		scanProfileID, _ := cmd.Flags().GetString("scanProfileID")

@@ -49,13 +49,11 @@ type configRequestBody struct {
 // setConfigCmd represents the setConfig command
 var SetConfigCmd = &cobra.Command{
 	Use:   "setConfig",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Set scan config for target",
+	Long: `Takes scan config variables from the config yaml file and the target from stdin. Example
+	
+	acucli targetGroup --id e3e5afcc-ee2e-431f-a8dc-9d894c93875d | cut -f2 | acucli target setConfig : Sets config for the targets in a target group
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		noIssues := true

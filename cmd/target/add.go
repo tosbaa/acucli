@@ -35,7 +35,11 @@ var AddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add targets",
 	Long: `Adding targets
-	 you can give the URL or file path that includes targets line by line`,
+	 It takes urls from stdin, Target Group ID is optional. Example:
+
+	 echo "https://127.0.0.1" | acucli target add : Add the target without target group
+	 cat targets.txt | acucli target add --gid=cd3db1f4-6275-478c-8830-8d96d37120f3 : Add targets from a file with target group
+	 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		groups := []string{}
 		input := filehelper.ReadStdin()

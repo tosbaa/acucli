@@ -24,13 +24,10 @@ type postBody struct {
 // addTargetsCmd represents the addTargets command
 var AddTargetsCmd = &cobra.Command{
 	Use:   "addTargets",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Add targets to a target group",
+	Long: `Add targets from stdin and the target group via id flag. Example:
+	echo targets.txt| acucli targetGroup addTargets --id 0637a8b0-900d-44e8-9a04-edef6ac25e23 : Add targets from file adds the defined target group id
+		`,
 	Run: func(cmd *cobra.Command, args []string) {
 		id, _ = cmd.Flags().GetString("id")
 		input := filehelper.ReadStdin()

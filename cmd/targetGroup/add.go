@@ -28,13 +28,12 @@ type ResponseBody struct {
 // addCmd represents the add command
 var AddCmd = &cobra.Command{
 	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Adds a new target group",
+	Long: `Adds target group. Example:
+	echo "test2" | acucli targetGroup add : add a target group named "test2"
+	cat targetGroups.txt | acucli targetGroup add : Add multiple target groups
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		if input != nil {

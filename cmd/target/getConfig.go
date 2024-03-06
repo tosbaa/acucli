@@ -47,13 +47,10 @@ type ConfigResponseBody struct {
 // getConfigCmd represents the getConfig command
 var GetConfigCmd = &cobra.Command{
 	Use:   "getConfig",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Get scan configuration for target",
+	Long: `Takes target ID from stdin example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+echo "5fac63fd-088c-4445-a2bf-a9f03f014832" | acucli target getConfig`,
 	Run: func(cmd *cobra.Command, args []string) {
 		input := filehelper.ReadStdin()
 		if input != nil {

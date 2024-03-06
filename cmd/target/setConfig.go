@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"strings"
@@ -86,7 +86,7 @@ func setConfigRequest(id string) int {
 
 	// Perform the request using the custom client
 	resp, _ := httpclient.MyHTTPClient.Do(req)
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	fmt.Print(string(body))
 
 	if err != nil {

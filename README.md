@@ -4,13 +4,14 @@ Acucli is a command-line tool developed in Go, designed to interact with Acuneti
 
 ## Features
 
-- Interact with Acunetix scans via command line.
-- Streamline the process of managing web application security assessments.
-- Written in Go, ensuring high performance and reliability.
+- Create, Delete, List and Set/Get Configuration to targets
+- Create, Delete, List and Add Targets to Target Group
+- Create, Delete, List and Import/Export Scan Profiles
+- Trigger Scans
 
 ## Installation
 
-You can install Acucli directly from the source code hosted on GitHub. Ensure you have Go installed on your system before proceeding with the installation.
+You can install Acucli directly from the source code hosted on GitHub. Ensure you have Go installed on your system before proceeding with the installation. Also grab a copy of the .acucli.yaml file to work with configuration setup and setting env variables. You can find it on the repository
 
 ```bash
 go install github.com/tosbaa/acucli@latest
@@ -23,6 +24,17 @@ After installation, you can start using Acucli to interact with your Acunetix sc
 ```bash
 acucli --help
 ```
+
+### Target
+```bash
+acucli target list # Lists the target with their corresponding ids
+echo "https://target.com" | acucli target add # Adds the target from stdin
+echo "<TARGET-ID>" | acucli target remove # Removed the target with the given id
+acucli target --id <TARGET-ID> # Get info about the target
+echo "<TARGET-ID>" | acucli target setConfig # Set scan configuration defined on the .acucli.yaml file
+```
+
+
 
 ## Contributing
 

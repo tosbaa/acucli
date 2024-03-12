@@ -28,12 +28,29 @@ acucli --help
 ### Target
 ```bash
 acucli target list # Lists the target with their corresponding ids
-echo "https://target.com" | acucli target add # Adds the target from stdin
-echo "<TARGET-ID>" | acucli target remove # Removed the target with the given id
-acucli target --id <TARGET-ID> # Get info about the target
-echo "<TARGET-ID>" | acucli target setConfig # Set scan configuration defined on the .acucli.yaml file
-```
 
+echo "https://target.com" | acucli target add # Adds the target from stdin
+
+echo "<TARGET-ID>" | acucli target remove # Removed the target with the given id
+
+acucli target --id <TARGET-ID> # Get info about the target
+
+echo "<TARGET-ID>" | acucli target setConfig # Set scan configuration defined on the .acucli.yaml file
+
+cat targets.txt | acucli target add --gid=<TARGETGROUP-ID> # Add targets to a target group with given id
+```
+### Target Group
+
+```bash
+echo "TargetGroupName" | acucli targetGroup add # Create new target group
+
+echo "<TARGETGROUP-ID>" | acucli targetGroup remove # Removed the target group with the given id
+
+acucli targetGroup list # List the target groups
+
+acucli targetGroup --id <TARGET-ID> # Get targets from target group
+
+```
 
 
 ## Contributing

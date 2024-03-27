@@ -1,0 +1,18 @@
+URL: "https://IP:PORT/api/v1"
+API: APIKEY
+description: "Default"
+limit_crawler_scope: false
+login.kind: "none"
+sensor: false
+ssh_credentials.kind: "none"
+proxy.enabled: false
+authentication.enabled: false
+client_certificate_password: ""
+scan_speed: "slow" #
+case_sensitive: "auto"
+technologies: ""
+custom_headers: "" #Header=Value
+custom_cookies: ""
+excluded_paths: "" #/path1,/path2
+user_agent: ""
+debug: false

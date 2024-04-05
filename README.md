@@ -17,6 +17,7 @@ You can install Acucli directly from the source code hosted on GitHub. Ensure yo
 go install github.com/tosbaa/acucli@latest
 
 ```
+
 ## Usage
 
 After installation, you can start using Acucli to interact with your Acunetix scans. For detailed usage instructions and command options, refer to the [documentation](https://github.com/tosbaa/acucli) or use the help command:
@@ -26,6 +27,7 @@ acucli --help
 ```
 
 ### Target
+
 ```bash
 acucli target list # Lists the target with their corresponding ids
 
@@ -39,6 +41,7 @@ echo "<TARGET-ID>" | acucli target setConfig # Set scan configuration defined on
 
 cat targets.txt | acucli target add --gid=<TARGETGROUP-ID> # Add targets to a target group with given id
 ```
+
 ### Target Group
 
 ```bash
@@ -52,7 +55,6 @@ acucli targetGroup --id <TARGET-ID> # Get targets from target group
 
 ```
 
-
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
@@ -64,4 +66,3 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ## Licensing
 
 The code in this project is licensed under MIT license.
-

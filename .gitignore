@@ -3,3 +3,6 @@ test.txt
 toremove.txt
 test.txt
 test.txt
+/build
+.DS_Store
+build.sh

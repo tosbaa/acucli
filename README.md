@@ -54,14 +54,36 @@ acucli targetGroup list # List the target groups
 acucli targetGroup --id <TARGET-ID> # Get targets from target group
 
 ```
+### Scan Profile
+
+```bash
+
+acucli scanProfile list # List Scan Profiles with their ids
+
+acucli scanProfile --id=<SCANPROFILE-ID> # Get Scan Profile info
+
+acucli scanProfile --id=<SCANPROFILE-ID> -e # Export the scan profile as json. It will write the json with the scan profile name with its current name
+
+cat <SCANPROFILE-NAME>.json | acucli scanProfile add # Add exported Scan Profile
+
+echo "<SCANPROFILE-ID>" | acucli scanProfile remove # Remove the scan profile by its id
+
+```
+### Scan
+
+```bash
+
+cat targets.txt | acucli scan --scanProfileID=<SCANPROFILE-ID> # Start scan for the target ids with given Scan Profile ID
+
+
+
+```
+
 
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
-## Links
-
-- Project repository: https://github.com/tosbaa/acucli
 
 ## Licensing
 

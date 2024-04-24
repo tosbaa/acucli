@@ -11,7 +11,7 @@ Acucli is a command-line tool developed in Go, designed to interact with Acuneti
 
 ## Installation
 
-You can install Acucli directly from the source code hosted on GitHub. Ensure you have Go installed on your system before proceeding with the installation. Also grab a copy of the .acucli.yaml file to work with configuration setup and setting env variables. You can find it on the repository
+You can install Acucli directly from the source code hosted on GitHub. Ensure you have Go installed on your system before proceeding with the installation. Also grab a copy of the .acucli.yaml file to work with configuration setup and setting env variables. You can find it on the repository. Put that file on the home folder in your machine.
 
 ```bash
 go install github.com/tosbaa/acucli@latest
@@ -74,6 +74,15 @@ echo "<SCANPROFILE-ID>" | acucli scanProfile remove # Remove the scan profile by
 ```bash
 
 cat targets.txt | acucli scan --scanProfileID=<SCANPROFILE-ID> # Start scan for the target ids with given Scan Profile ID
+
+```
+
+### Example Scenarios
+```bash
+
+acucli targetGroup --id=<TARGETGROUP-ID> | cut -f2 | acucli scan --scanProfileID=<SCANPROFILE-ID> # Start scan for the targets for given target group
+
+acucli targetGroup --id=<TARGETGROUP-ID> | cut -f2 | acucli target remove # Remove all targets inside a Target Group
 
 ```
 

@@ -75,8 +75,6 @@ echo "<SCANPROFILE-ID>" | acucli scanProfile remove # Remove the scan profile by
 
 cat targets.txt | acucli scan --scanProfileID=<SCANPROFILE-ID> # Start scan for the target ids with given Scan Profile ID
 
-
-
 ```
 
 
